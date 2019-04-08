@@ -127,6 +127,8 @@ filetype plugin indent on
 
 if v:version < 800
     " ----- Syntastic ----------------------
+    "  NOTE: if ":h syntastic" doesn't work, run ":helptags
+    "  ~/shdw/vim/bundle/syntastic/doc" to build the help docs
     set runtimepath^=$SHDWDIR/rc/vim/bundle/syntastic
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
@@ -142,7 +144,10 @@ if v:version < 800
     let g:syntastic_warning_symbol="⚠"
     let g:syntastic_error_symbol="✗"
     let g:syntastic_cpp_compiler = '' "'clang++'
-    let g:syntastic_cpp_compiler_options = ' -std=c++11'
+    let g:syntastic_cpp_compiler_options = ' -std=c++14'
+    let g:syntastic_cpp_cpplint_exec = "cpplint"
+    let g:syntastic_cpp_checkers = ['cpplint']
+    let g:syntastic_cpp_cpplint_args = "--linelength=160 --filter=-build/namespaces,-whitespace/parens,-build/c++11" 
     let g:syntastic_javascript_checkers = ['eslint']
 else
     set runtimepath^=$SHDWDIR/rc/vim/bundle/completor.vim
@@ -162,7 +167,7 @@ else
 
     let g:ale_cpp_gcc_options = '-std=c++14 -I/usr/include/eigen3'
     let g:ale_cpp_clang_options = '-std=c++14 -I/usr/include/eigen3'
-
+    let b:ale_cpp_linters = ['cpplint']
     let g:ale_sign_error = '✗'
     let g:ale_sign_warning = '⚠'
     let g:ale_python_flake8_args = "--max-line-length=160 --builtins=reload,unicode"
