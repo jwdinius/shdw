@@ -136,32 +136,17 @@ if [ -f ${HOME}/.pathrc ]; then
   source ${HOME}/.pathrc
 fi
 
-if [ -f /invia/mercury/RobotCode/mercury/setup.bash ]; then
-    source /invia/mercury/RobotCode/mercury/setup.bash
-fi
-
-if [ -f /invia/rms/RobotCode/rms/setup.bash ]; then
-    source /invia/rms/RobotCode/rms/setup.bash
-fi
-
 # if [ -s $SHDWDIR/scm_breeze/scm_breeze.shdw.sh ]; then
 #     source "$SHDWDIR/scm_breeze/scm_breeze.shdw.sh"
 # fi
 
-source /home/jdinius/repos/robot/mercury/setup.bash
-export PYTHONPATH='/home/jdinius/work/invia-controls/build':$PYTHONPATH
 # source /opt/intel/parallel_studio_xe_2018.2.046/psxevars.sh intel64
-source /home/jdinius/work/ACADOtoolkit/build/acado_env.sh
 export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 export EDITOR=vim
 
-# vim:syntax=sh
-alias rms='ssh -l rmsop -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /home/jdinius/repos/orchestration/.ssh/id_rsa'
-alias rmscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /home/jdinius/repos/orchestration/.ssh/id_rsa'
-alias provision='time ansible-playbook /home/jdinius/repos/orchestration/provision.yml'
-alias rms='ssh -l rmsop -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /home/jdinius/repos/orchestration/.ssh/id_rsa'
-alias rmscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /home/jdinius/repos/orchestration/.ssh/id_rsa'
-alias maestro='cd /home/jdinius/repos/orchestration; time ansible-playbook manage.yml -t'
-alias rms='ssh -l rmsop -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /home/jdinius/repos/orchestration/.ssh/id_rsa'
-alias rmscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /home/jdinius/repos/orchestration/.ssh/id_rsa'
-alias maestro='cd /home/jdinius/repos/orchestration; time ansible-playbook manage.yml -t'
+export PATH=/home/jdinius/miniconda3/bin:$PATH
+xhost +local:docker
+
+export CUDACXX=/usr/local/cuda/bin/nvcc
+#source ~/.shdw/shdw.sh jwd
+#source ~/.shdw/shdw.sh jdi
