@@ -136,17 +136,12 @@ if [ -f ${HOME}/.pathrc ]; then
   source ${HOME}/.pathrc
 fi
 
-# if [ -s $SHDWDIR/scm_breeze/scm_breeze.shdw.sh ]; then
-#     source "$SHDWDIR/scm_breeze/scm_breeze.shdw.sh"
-# fi
-
-# source /opt/intel/parallel_studio_xe_2018.2.046/psxevars.sh intel64
 export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 export EDITOR=vim
 
-export PATH=/home/jdinius/miniconda3/bin:$PATH
 xhost +local:docker
 
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
 export CUDACXX=/usr/local/cuda/bin/nvcc
-#source ~/.shdw/shdw.sh jwd
-#source ~/.shdw/shdw.sh jdi

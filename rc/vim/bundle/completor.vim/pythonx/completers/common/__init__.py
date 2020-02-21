@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import logging
 import completor
 import itertools
 import re
@@ -7,7 +8,8 @@ import re
 from completor.compat import text_type
 
 from .filename import Filename  # noqa
-from .buffer import Buffer  # noqa
+from .neoinclude import Neoinclude  # noqa
+from .buffer import Buffer  # naoqa
 from .omni import Omni  # noqa
 
 try:
@@ -17,6 +19,7 @@ except ImportError:
     pass
 
 word = re.compile(r'[^\W\d]\w*$', re.U)
+logger = logging.getLogger('completor')
 
 
 class Common(completor.Completor):
@@ -25,14 +28,23 @@ class Common(completor.Completor):
 
     hooks = ['ultisnips', 'buffer']
 
+    @classmethod
+    def is_common(cls, comp):
+        return isinstance(comp, (cls, Buffer))
+
     def completions(self, completer, base):
         com = completor.get(completer)
         if not com:
             return []
         com.ft = self.ft
+        com.input_data = self.input_data
         if com.disabled:
             return []
-        return com.parse(base)
+        func = getattr(com, 'parse', None)
+        try:
+            return (func or com.on_complete)(base)
+        except AttributeError as e:
+            return []
 
     def parse(self, base):
         if not isinstance(base, text_type):

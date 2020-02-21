@@ -3,9 +3,8 @@
 import collections
 import itertools
 import re
-import vim
 
-from completor import Completor
+from completor import Completor, vim
 from completor.compat import to_unicode
 
 from .utils import test_subseq, LIMIT
@@ -30,7 +29,7 @@ def get_encoding(nr):
 
 
 class TokenStore(object):
-    pat = re.compile(r'[^\W\d]{3,}\w*', re.U)
+    pat = re.compile(r'[^\W\d]{3}\w{0,45}', re.U)
 
     def __init__(self):
         self.cache = {}
@@ -76,6 +75,7 @@ class TokenStore(object):
 
         for buffer in vim.buffers:
             self.store_buffer(buffer, base, nr, line)
+
 
 token_store = TokenStore()
 
