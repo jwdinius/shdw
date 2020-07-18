@@ -190,7 +190,7 @@ set autoindent                                   " Auto indent new lines
 set nosmartindent                                " Indent smartly after {'s, etc 
 set expandtab                                    " Spaces instead of tabs
 set tabstop=4                                    " Cols per tab
-set shiftwidth=4                                 " Cols per shift (>> and <<)
+set shiftwidth=3                                 " Cols per shift (>> and <<)
 set showmatch                                    " Briefly show the matching bracket when you type it (won't scroll)
 set guioptions-=T                                " No toolbar
 set guioptions-=M                                " No menu bar
